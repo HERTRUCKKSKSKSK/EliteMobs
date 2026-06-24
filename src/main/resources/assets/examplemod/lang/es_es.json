@@ -1,0 +1,35 @@
+{
+  "key.elitemobs.open_menu": "Abrir Selección de Círculo",
+  "key.categories.elitemobs": "Elite Mobs",
+
+  "elitemobs.circle.limbo":     "Limbo",
+  "elitemobs.circle.lust":      "Lujuria",
+  "elitemobs.circle.gluttony":  "Gula",
+  "elitemobs.circle.greed":     "Avaricia",
+  "elitemobs.circle.anger":     "Ira",
+  "elitemobs.circle.heresy":    "Herejía",
+  "elitemobs.circle.violence":  "Violencia",
+  "elitemobs.circle.fraud":     "Fraude",
+  "elitemobs.circle.treachery": "Traición",
+
+  "elitemobs.tier.tough":     "Rudo",
+  "elitemobs.tier.elite":     "Elite",
+  "elitemobs.tier.champion":  "Campeón",
+  "elitemobs.tier.berserker": "Berserker",
+  "elitemobs.tier.infernal":  "Lucifer",
+
+  "elitemobs.ui.title":        "Selecciona tu Círculo",
+  "elitemobs.ui.subtitle":     "Progresión del Infierno de Dante",
+  "elitemobs.ui.close":        "Cerrar",
+  "elitemobs.ui.active":       "ACTIVO",
+  "elitemobs.ui.locked":       "BLOQUEADO",
+  "elitemobs.ui.bosses_night": "Jefes/noche",
+
+  "elitemobs.loot.legendary_sword": "El Juicio de Lucifer",
+  "elitemobs.loot.infernal_helm":   "Corona del Fuego Infernal",
+  "elitemobs.loot.infernal_chest":  "Pechera de la Condenación",
+  "elitemobs.loot.infernal_legs":   "Grebas de la Perdición",
+  "elitemobs.loot.infernal_boots":  "Botas del Abismo",
+  "elitemobs.loot.champion_sword":  "Hoja del Campeón",
+  "elitemobs.loot.berserk_sword":   "Furia del Berserker"
+}

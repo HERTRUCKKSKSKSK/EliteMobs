@@ -7,160 +7,123 @@ import net.minecraft.world.BossEvent;
 
 /**
  * Difficulty tiers for elite mobs, ordered from weakest to strongest.
- * Each tier defines stat multipliers, display color, spawn sound, and
- * whether the mob should be equipped with armor/weapons (and enchanted
- * gear for the top tiers). Champion and Berserker also get a boss bar.
+ * TOUGH → ELITE → CHAMPION → BERSERKER → INFERNAL (Lucifer)
+ *
+ * Spawn probabilities are set per-DifficultyLevel, not here. These
+ * values are only used for the "/elite <tier>" forced-spawn command.
  */
 public enum EliteTier {
 
     TOUGH(
             "Tough",
             ChatFormatting.GREEN,
-            1.8,   // health multiplier
-            1.3,   // damage multiplier
-            45,    // spawn weight (relative, out of 100 total)
-            false, // gear?
-            false, // enchanted gear?
+            1.8,   // health
+            1.3,   // damage
+            false, // gear
+            false, // enchanted gear
             SoundEvents.WOLF_HOWL,
-            1.0F,  // sound volume
-            false, // boss bar?
-            null
+            1.0F,
+            false,
+            null,
+            0      // loot level 0
     ),
     ELITE(
             "Elite",
             ChatFormatting.GOLD,
-            2.5,
-            1.6,
-            30,
+            2.8,
+            1.7,
             true,
             false,
             SoundEvents.ELDER_GUARDIAN_CURSE,
-            1.0F,
+            1.2F,
             false,
-            null
+            null,
+            1
     ),
     CHAMPION(
             "Champion",
             ChatFormatting.AQUA,
-            3.5,
-            2.2,
-            18,
+            4.5,
+            2.5,
             true,
             true,
             SoundEvents.WITHER_AMBIENT,
-            1.2F,
+            1.4F,
             true,
-            BossEvent.BossBarColor.BLUE
+            BossEvent.BossBarColor.BLUE,
+            2
     ),
     BERSERKER(
             "Berserker",
             ChatFormatting.DARK_RED,
-            5.0,
-            3.0,
-            7,
+            7.0,
+            3.5,
             true,
             true,
             SoundEvents.ENDER_DRAGON_GROWL,
-            1.5F,
+            1.6F,
             true,
-            BossEvent.BossBarColor.RED
+            BossEvent.BossBarColor.RED,
+            3
+    ),
+    INFERNAL(
+            "Lucifer",
+            ChatFormatting.DARK_PURPLE,
+            12.0,
+            5.0,
+            true,
+            true,
+            // Combinación infernal: usamos WITHER_DEATH (se tocará junto con ENDER_DRAGON_GROWL desde el manager)
+            SoundEvents.WITHER_DEATH,
+            2.0F,
+            true,
+            BossEvent.BossBarColor.PURPLE,
+            4
     );
 
     private final String displayName;
     private final ChatFormatting color;
     private final double healthMultiplier;
     private final double damageMultiplier;
-    private final int spawnWeight;
     private final boolean hasGear;
     private final boolean enchantedGear;
     private final SoundEvent spawnSound;
     private final float spawnSoundVolume;
     private final boolean hasBossBar;
     private final BossEvent.BossBarColor bossBarColor;
+    private final int lootLevel; // 0=Tough, 1=Elite, 2=Champion, 3=Berserker, 4=Infernal
 
-    EliteTier(String displayName, ChatFormatting color, double healthMultiplier,
-              double damageMultiplier, int spawnWeight, boolean hasGear, boolean enchantedGear,
-              SoundEvent spawnSound, float spawnSoundVolume, boolean hasBossBar,
-              BossEvent.BossBarColor bossBarColor) {
+    EliteTier(String displayName, ChatFormatting color,
+              double healthMultiplier, double damageMultiplier,
+              boolean hasGear, boolean enchantedGear,
+              SoundEvent spawnSound, float spawnSoundVolume,
+              boolean hasBossBar, BossEvent.BossBarColor bossBarColor,
+              int lootLevel) {
         this.displayName = displayName;
         this.color = color;
         this.healthMultiplier = healthMultiplier;
         this.damageMultiplier = damageMultiplier;
-        this.spawnWeight = spawnWeight;
         this.hasGear = hasGear;
         this.enchantedGear = enchantedGear;
         this.spawnSound = spawnSound;
         this.spawnSoundVolume = spawnSoundVolume;
         this.hasBossBar = hasBossBar;
         this.bossBarColor = bossBarColor;
+        this.lootLevel = lootLevel;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
+    public String getDisplayName() { return displayName; }
+    public ChatFormatting getColor() { return color; }
+    public double getHealthMultiplier() { return healthMultiplier; }
+    public double getDamageMultiplier() { return damageMultiplier; }
+    public boolean hasGear() { return hasGear; }
+    public boolean hasEnchantedGear() { return enchantedGear; }
+    public SoundEvent getSpawnSound() { return spawnSound; }
+    public float getSpawnSoundVolume() { return spawnSoundVolume; }
+    public boolean hasBossBar() { return hasBossBar; }
+    public BossEvent.BossBarColor getBossBarColor() { return bossBarColor; }
+    public int getLootLevel() { return lootLevel; }
 
-    public ChatFormatting getColor() {
-        return color;
-    }
-
-    public double getHealthMultiplier() {
-        return healthMultiplier;
-    }
-
-    public double getDamageMultiplier() {
-        return damageMultiplier;
-    }
-
-    public int getSpawnWeight() {
-        return spawnWeight;
-    }
-
-    public boolean hasGear() {
-        return hasGear;
-    }
-
-    public boolean hasEnchantedGear() {
-        return enchantedGear;
-    }
-
-    public SoundEvent getSpawnSound() {
-        return spawnSound;
-    }
-
-    public float getSpawnSoundVolume() {
-        return spawnSoundVolume;
-    }
-
-    /** Whether mobs of this tier display a boss-style health bar (like the Wither/Ender Dragon). */
-    public boolean hasBossBar() {
-        return hasBossBar;
-    }
-
-    public BossEvent.BossBarColor getBossBarColor() {
-        return bossBarColor;
-    }
-
-    /**
-     * Picks a random tier using weighted probabilities (see spawnWeight on each
-     * constant). Berserker is rare, Tough is common.
-     */
-    public static EliteTier rollRandomTier(java.util.Random random) {
-        int totalWeight = 0;
-        for (EliteTier tier : values()) {
-            totalWeight += tier.spawnWeight;
-        }
-
-        int roll = random.nextInt(totalWeight);
-        int cumulative = 0;
-
-        for (EliteTier tier : values()) {
-            cumulative += tier.spawnWeight;
-            if (roll < cumulative) {
-                return tier;
-            }
-        }
-
-        // Should never happen, but fall back to the weakest tier just in case.
-        return TOUGH;
-    }
+    /** Returns true if this tier is the Infernal/Lucifer tier. */
+    public boolean isInfernal() { return this == INFERNAL; }
 }

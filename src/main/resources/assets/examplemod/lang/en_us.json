@@ -1,13 +1,35 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item",
+  "key.elitemobs.open_menu": "Open Circle Selection",
+  "key.categories.elitemobs": "Elite Mobs",
 
-  "examplemod.configuration.title": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
-  "examplemod.configuration.items": "Item List",
-  "examplemod.configuration.logDirtBlock": "Log Dirt Block",
-  "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "examplemod.configuration.magicNumber": "Magic Number"
+  "elitemobs.circle.limbo":     "Limbo",
+  "elitemobs.circle.lust":      "Lust",
+  "elitemobs.circle.gluttony":  "Gluttony",
+  "elitemobs.circle.greed":     "Greed",
+  "elitemobs.circle.anger":     "Anger",
+  "elitemobs.circle.heresy":    "Heresy",
+  "elitemobs.circle.violence":  "Violence",
+  "elitemobs.circle.fraud":     "Fraud",
+  "elitemobs.circle.treachery": "Treachery",
+
+  "elitemobs.tier.tough":     "Tough",
+  "elitemobs.tier.elite":     "Elite",
+  "elitemobs.tier.champion":  "Champion",
+  "elitemobs.tier.berserker": "Berserker",
+  "elitemobs.tier.infernal":  "Lucifer",
+
+  "elitemobs.ui.title":        "Select Your Circle",
+  "elitemobs.ui.subtitle":     "Dante's Inferno Progression",
+  "elitemobs.ui.close":        "Close",
+  "elitemobs.ui.active":       "ACTIVE",
+  "elitemobs.ui.locked":       "LOCKED",
+  "elitemobs.ui.bosses_night": "Bosses/night",
+
+  "elitemobs.loot.legendary_sword": "Lucifer's Judgement",
+  "elitemobs.loot.infernal_helm":   "Hellfire Crown",
+  "elitemobs.loot.infernal_chest":  "Breastplate of Damnation",
+  "elitemobs.loot.infernal_legs":   "Leggings of Perdition",
+  "elitemobs.loot.infernal_boots":  "Boots of the Abyss",
+  "elitemobs.loot.champion_sword":  "Champion's Blade",
+  "elitemobs.loot.berserk_sword":   "Berserker's Wrath"
 }
