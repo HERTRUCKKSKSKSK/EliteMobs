@@ -76,6 +76,11 @@ public class EliteMobManager {
     public static boolean spawnEliteNear(ServerPlayer player) {
         PlayerProgressionData data = PlayerProgressionData.get(player);
         DifficultyLevel diff = data.getActiveLevel();
+
+        if (diff == DifficultyLevel.LIMBO) {
+            return false;
+        }
+
         EliteTier tier = diff.rollTier(RANDOM);
         return spawnEliteNear(player, tier, diff);
     }

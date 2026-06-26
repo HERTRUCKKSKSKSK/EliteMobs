@@ -27,13 +27,13 @@ public enum DifficultyLevel {
             0,
             "Limbo",
             ChatFormatting.WHITE,
-            "§7The edge of darkness. 1 boss per night.",
+            "§7The edge of darkness. 0 boss per night for now.",
             // Unlock: no armor, no xp
             ArmorTierRequirement.NONE, 0,
             // Bosses per night
-            1,
+            0,
             // Spawn weights: TOUGH, ELITE, CHAMPION, BERSERKER, INFERNAL
-            new int[]{80, 19, 1, 0, 0},
+            new int[]{0, 0, 0, 0, 0},
             // Global mob multiplier (health, damage)
             1.0, 1.0
     ),
@@ -118,7 +118,7 @@ public enum DifficultyLevel {
             "§4Blood flows freely. 5 bosses per night. Diamond armor + 20 levels.",
             ArmorTierRequirement.DIAMOND, 20,
             5,
-            new int[]{40, 35, 19, 9, 5},  // NOTE: Infernal now has 5%! (adjusting: 40+35+19+9+5=108 → normalize below... actually: 38+33+15+9+5=100)
+            new int[]{40, 40, 20, 9, 1},  // NOTE: Infernal now has 1%! (adjusting: 40+35+19+9+5=108 → normalize below... actually: 38+33+15+9+5=100)
             // Let's keep exact: 38,33,15,9,5 = 100
             2.2, 2.0
     ),
@@ -133,7 +133,7 @@ public enum DifficultyLevel {
             "§8Deception kills. 5 bosses per night. Diamond armor + 30 levels.",
             ArmorTierRequirement.DIAMOND, 30,
             5,
-            new int[]{20, 35, 20, 15, 10},
+            new int[]{20, 40, 20, 15, 5},
             2.8, 2.5
     ),
 
@@ -147,7 +147,7 @@ public enum DifficultyLevel {
             "§8§lAbandon all hope, ye who enter here. 5 bosses per night. Netherite + 30 levels.",
             ArmorTierRequirement.NETHERITE, 30,
             5,
-            new int[]{0, 25, 30, 25, 20},
+            new int[]{0, 35, 30, 25, 10},
             4.0, 3.5
     );
 
